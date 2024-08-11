@@ -1,16 +1,24 @@
 package com.dufuna.berlin.ethanbajulaiye.lekki.service;
 
 import com.dufuna.berlin.ethanbajulaiye.lekki.model.LekkiProperty;
+import com.dufuna.berlin.ethanbajulaiye.lekki.repository.SimpleLekkiPropertyRepositoryImpl;
 
-public class MockLekkiPropertyService {
+import java.util.ArrayList;
+import java.util.HashMap;
 
-    public void saveProperty(LekkiProperty lekkiProperty) {
+public class MockLekkiPropertyService implements LekkiPropertyService {
+
+    public LekkiProperty saveProperty(LekkiProperty lekkiProperty, HashMap<Integer, LekkiProperty> propertyHashMap) {
         System.out.println("MockLekkiPropertyService.saveProperty called");
+        return new SimpleLekkiPropertyRepositoryImpl().save(lekkiProperty, propertyHashMap);
     }
 
-    public LekkiProperty getProperty() {
+    public LekkiProperty getProperty(int id, HashMap<Integer, LekkiProperty> propertyHashMap) {
         System.out.println("MockLekkiPropertyService.getProperty called");
-        return new LekkiProperty();
+        return new SimpleLekkiPropertyRepositoryImpl().findById(id, propertyHashMap);
+    }
 
+    public ArrayList<LekkiProperty> getProperties(ArrayList<LekkiProperty> propertyList, HashMap<Integer, LekkiProperty> propertyHashMap) {
+        return new SimpleLekkiPropertyRepositoryImpl().findAll(propertyList, propertyHashMap);
     }
 }
